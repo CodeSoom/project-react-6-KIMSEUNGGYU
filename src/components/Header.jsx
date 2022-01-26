@@ -2,18 +2,18 @@ import styled from '@emotion/styled';
 
 export default function Header() {
   return (
-    <HeaderWrapper>
+    <Wrapper>
       <img src="/images/logo.svg" alt="logo" />
       <ul>
         <li>블로그</li>
         <li>시리즈</li>
         <li>로그인</li>
       </ul>
-    </HeaderWrapper>
+    </Wrapper>
   );
 }
 
-const HeaderWrapper = styled.header`
+const Wrapper = styled.header`
   width: 100%;
   margin: 1rem 0;
   display: flex;
