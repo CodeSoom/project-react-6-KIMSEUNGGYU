@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import App from './App';
+import Header from './Header';
 
-test('App', () => {
-  const { container } = render(<App />);
+test('Header', () => {
+  const { container } = render(<Header />);
 
   expect(container.innerHTML).toContain('<img src=');
   expect(container).toHaveTextContent('블로그');
