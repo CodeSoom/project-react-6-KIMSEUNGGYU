@@ -15,11 +15,11 @@ describe('tagsContainer', () => {
     }));
   });
 
-  it('render', () => {
+  it('renders tags', () => {
     const { queryByRole } = render(<TagsContainer />);
 
-    TAGS.forEach((tag) => {
-      expect(queryByRole('button', { name: tag })).toBeInTheDocument();
+    TAGS.forEach(({ name }) => {
+      expect(queryByRole('button', { name })).toBeInTheDocument();
     });
   });
 });
