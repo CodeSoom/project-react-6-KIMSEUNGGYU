@@ -15,6 +15,7 @@ describe('TagItem', () => {
     return render(
       <TagItem
         name={tagName}
+        selectedTag="#전체보기"
         onClick={handleClick}
       />,
     );

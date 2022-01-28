@@ -18,7 +18,7 @@ export default function TagsContainer() {
     dispatch(loadTags());
   }, []);
 
-  const { tags } = useSelector((state) => state);
+  const { selectedTag, tags } = useSelector((state) => state);
 
   const handleClickSelectTag = (tagName) => {
     dispatch(setSelectedTag(tagName));
@@ -34,6 +34,7 @@ export default function TagsContainer() {
         <TagItem
           key={id}
           name={name}
+          selectedTag={selectedTag}
           onClick={handleClickSelectTag}
         />
       ))}

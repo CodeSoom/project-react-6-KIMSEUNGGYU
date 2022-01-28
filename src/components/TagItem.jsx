@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 
-export default function TagItem({ name, onClick }) {
+export default function TagItem({ name, selectedTag, onClick }) {
   const tag = `#${name}`;
 
   return (
     <Item>
       <button
         type="button"
+        className={tag === selectedTag ? 'active' : ''}
         onClick={() => onClick(tag)}
       >
         {tag}
@@ -33,8 +34,9 @@ const Item = styled.li`
     cursor: pointer;
     color: #40a9ff;
   }
-  button:active {
+  button.active {
     cursor: pointer;
     color: #096dd9;
+    border: 1px solid #096dd9;
   }
 `;
