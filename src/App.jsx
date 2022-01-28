@@ -1,35 +1,14 @@
 import styled from '@emotion/styled';
 
 import Header from './components/Header';
-
-function Tags() {
-  return (
-    <ul>
-      <li>
-        <button type="button">
-          태그1
-        </button>
-      </li>
-      <li>
-        <button type="button">
-          태그2
-        </button>
-      </li>
-      <li>
-        <button type="button">
-          태그3
-        </button>
-      </li>
-    </ul>
-  );
-}
+import TagsContainer from './containers/TagsContainer';
 
 export default function App() {
   return (
     <Container>
       <Header />
       <Divider />
-      <Tags />
+      <TagsContainer />
     </Container>
   );
 }
