@@ -3,7 +3,13 @@
 // 2. 성공적으로 요청이 되면, tags 정보를 전역으로 저장한다.
 //
 
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  loadTags,
+} from '../modules/slice';
 
 function Tags() {
   return (
@@ -28,7 +34,17 @@ function Tags() {
 }
 
 export default function TagsContainer() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadTags());
+  }, []);
+
   const { tags } = useSelector((state) => state);
+
+  if (!tags.length) {
+    return <p>등록된 태그가 없어요</p>;
+  }
 
   return (
     <ul>
