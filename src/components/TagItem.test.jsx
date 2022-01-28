@@ -1,11 +1,36 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import TagItem from './TagItem';
 
-test('TagItem', () => {
+describe('TagItem', () => {
   const tagName = 'tag1';
 
-  const { container } = render(<TagItem name={tagName} />);
+  const handleClick = jest.fn();
 
-  expect(container).toHaveTextContent(`#${tagName}`);
+  beforeEach(() => {
+    handleClick.mockClear();
+  });
+
+  function renderTagItem() {
+    return render(
+      <TagItem
+        name={tagName}
+        onClick={handleClick}
+      />,
+    );
+  }
+
+  it('renders Tag', () => {
+    const { container } = renderTagItem();
+
+    expect(container).toHaveTextContent(`#${tagName}`);
+  });
+
+  it('clicks tag button, calls click handler', () => {
+    const { getByRole } = renderTagItem();
+
+    fireEvent.click(getByRole('button', { name: `#${tagName}` }));
+
+    expect(handleClick).toBeCalledWith(`#${tagName}`);
+  });
 });
