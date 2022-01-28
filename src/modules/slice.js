@@ -7,6 +7,7 @@ import { fetchTags } from '../libs/api';
 const { actions, reducer } = createSlice({
   name: 'application',
   initialState: {
+    selectedTag: '', // 초기값 null이 나을까?
     tags: [],
   },
   reducers: {
@@ -16,7 +17,13 @@ const { actions, reducer } = createSlice({
         tags,
       };
     },
-    setSelectedTag() {},
+
+    setSelectedTag(state, { payload: selectedTagName }) {
+      return {
+        ...state,
+        selectedTag: selectedTagName,
+      };
+    },
   },
 });
 
