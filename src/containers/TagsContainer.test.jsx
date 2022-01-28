@@ -1,15 +1,29 @@
+import thunk from 'redux-thunk';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
+import configureStore from 'redux-mock-store';
+
 import TagsContainer from './TagsContainer';
 
+import {
+  loadTags,
+  setTags,
+} from '../modules/slice';
+
 import TAGS from '../../fixture/tags';
+
+const middleware = [thunk];
+const mockStore = configureStore(middleware);
 
 jest.mock('react-redux');
 jest.mock('../libs/api');
 
 describe('tagsContainer', () => {
+  let store;
+
   const dispatch = jest.fn();
   beforeEach(() => {
     dispatch.mockClear();
@@ -29,10 +43,24 @@ describe('tagsContainer', () => {
   context('when load', () => {
     given('tags', () => []);
 
-    it('dispatchs loadTags', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs loadTags', async () => {
       renderTagsContainer();
 
+      // load 시 dispatch 콜 확인
       expect(dispatch).toBeCalled();
+
+      // dispatch 와 함깨 호출된 thunk 확인 위한 작업?
+      await store.dispatch(loadTags());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        setTags([]),
+      ]);
     });
   });
 
