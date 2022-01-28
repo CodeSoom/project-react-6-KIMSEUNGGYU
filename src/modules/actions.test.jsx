@@ -1,4 +1,4 @@
-import thunk from 'redux-thunk';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
 
@@ -7,8 +7,7 @@ import {
   setTags,
 } from './slice';
 
-const middleware = [thunk];
-const mockStore = configureStore(middleware);
+const mockStore = configureStore(getDefaultMiddleware());
 
 jest.mock('../libs/api');
 

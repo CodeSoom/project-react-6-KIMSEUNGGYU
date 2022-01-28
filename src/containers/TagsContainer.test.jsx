@@ -1,10 +1,10 @@
-import thunk from 'redux-thunk';
-
 import { useSelector, useDispatch } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
+
+import { render } from '@testing-library/react';
 
 import TagsContainer from './TagsContainer';
 
@@ -15,8 +15,7 @@ import {
 
 import TAGS from '../../fixture/tags';
 
-const middleware = [thunk];
-const mockStore = configureStore(middleware);
+const mockStore = configureStore(getDefaultMiddleware());
 
 jest.mock('react-redux');
 jest.mock('../libs/api');
