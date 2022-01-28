@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import styled from '@emotion/styled';
+
 import {
   loadTags,
 } from '../modules/slice';
@@ -22,13 +24,21 @@ export default function TagsContainer() {
   }
 
   return (
-    <ul>
+    <TagList>
       {tags.map(({ id, name }) => (
         <TagItem
           key={id}
           name={name}
         />
       ))}
-    </ul>
+    </TagList>
   );
 }
+
+const TagList = styled.ul`
+  margin: 2rem 0;
+  background-color : white;
+  display: flex;
+  border-radius: 5px;
+  padding: 1rem;
+`;
