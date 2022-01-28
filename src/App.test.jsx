@@ -1,8 +1,27 @@
+import { useSelector, useDispatch } from 'react-redux';
+
 import { render } from '@testing-library/react';
 
 import App from './App';
 
+import TAGS from '../fixture/tags';
+
+jest.mock('react-redux');
+jest.mock('./libs/api');
+
 describe('App', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      tags: TAGS,
+    }));
+  });
+
   it('renders  Header', () => {
     const { container } = render(<App />);
 
@@ -15,10 +34,8 @@ describe('App', () => {
   it('redners tags', () => {
     const { queryByRole } = render(<App />);
 
-    const tags = ['태그1', '태그2', '태그3'];
-
-    tags.forEach((tag) => {
-      expect(queryByRole('button', { name: tag })).toBeInTheDocument();
+    TAGS.forEach(({ name }) => {
+      expect(queryByRole('button', { name })).toBeInTheDocument();
     });
   });
 });
