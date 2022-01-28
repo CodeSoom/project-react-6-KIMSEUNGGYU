@@ -16,12 +16,14 @@ const { actions, reducer } = createSlice({
         tags,
       };
     },
+    setSelectedTag() {},
   },
 });
 
 // export actions
 export const {
   setTags,
+  setSelectedTag,
 } = actions;
 
 // thunk actions

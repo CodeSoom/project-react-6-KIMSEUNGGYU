@@ -4,13 +4,14 @@ import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import TagsContainer from './TagsContainer';
 
 import {
   loadTags,
   setTags,
+  setSelectedTag,
 } from '../modules/slice';
 
 import TAGS from '../../fixture/tags';
@@ -72,6 +73,16 @@ describe('tagsContainer', () => {
       TAGS.forEach(({ name }) => {
         expect(queryByRole('button', { name: `#${name}` })).toBeInTheDocument();
       });
+    });
+
+    it('clicks tag button, calls dispatch to change selecteTag', () => {
+      const selectedTagName = `#${TAGS[1].name}`;
+
+      const { getByRole } = renderTagsContainer();
+
+      fireEvent.click(getByRole('button', { name: selectedTagName }));
+
+      expect(dispatch).toBeCalledWith(setSelectedTag(selectedTagName));
     });
   });
 
