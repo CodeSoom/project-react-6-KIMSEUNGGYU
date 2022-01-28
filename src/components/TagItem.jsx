@@ -1,10 +1,15 @@
 import styled from '@emotion/styled';
 
-export default function TagItem({ name }) {
+export default function TagItem({ name, onClick }) {
+  const tag = `#${name}`;
+
   return (
     <Item>
-      <button type="button">
-        {`#${name}`}
+      <button
+        type="button"
+        onClick={() => onClick(tag)}
+      >
+        {tag}
       </button>
     </Item>
   );
