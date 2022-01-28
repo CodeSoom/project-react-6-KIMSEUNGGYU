@@ -4,7 +4,9 @@ import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
+import userEvent from '@testing-library/user-event';
 
 import TagsContainer from './TagsContainer';
 
@@ -80,7 +82,7 @@ describe('tagsContainer', () => {
 
       const { getByRole } = renderTagsContainer();
 
-      fireEvent.click(getByRole('button', { name: selectedTagName }));
+      userEvent.click(getByRole('button', { name: selectedTagName }));
 
       expect(dispatch).toBeCalledWith(setSelectedTag(selectedTagName));
     });

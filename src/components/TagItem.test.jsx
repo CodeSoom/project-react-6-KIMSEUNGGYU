@@ -1,4 +1,6 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
+import userEvent from '@testing-library/user-event';
 
 import TagItem from './TagItem';
 
@@ -30,7 +32,7 @@ describe('TagItem', () => {
   it('clicks tag button, calls click handler', () => {
     const { getByRole } = renderTagItem();
 
-    fireEvent.click(getByRole('button', { name: `#${tagName}` }));
+    userEvent.click(getByRole('button', { name: `#${tagName}` }));
 
     expect(handleClick).toBeCalledWith(`#${tagName}`);
   });
