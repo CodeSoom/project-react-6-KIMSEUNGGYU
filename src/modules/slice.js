@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // api
+import { fetchTags } from '../libs/api';
 
 //
 const { actions, reducer } = createSlice({
@@ -25,8 +26,10 @@ export const {
 
 // thunk actions
 export function loadTags() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
+    const tags = await fetchTags();
 
+    dispatch(setTags(tags));
   };
 }
 
