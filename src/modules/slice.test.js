@@ -1,5 +1,6 @@
 import reducer, {
   setTags,
+  setSelectedTag,
 } from './slice';
 
 import TAGS from '../../fixture/tags';
@@ -16,6 +17,20 @@ describe('reducer', () => {
 
       expect(state.tags).toHaveLength(TAGS.length);
       expect(state.tags).toEqual(TAGS);
+    });
+  });
+
+  describe('setSelectedTag', () => {
+    it('chagnes tags', () => {
+      const selectedTag = '#TAG1';
+
+      const previousState = {
+        selectedTag: '',
+      };
+
+      const state = reducer(previousState, setSelectedTag(selectedTag));
+
+      expect(state.selectedTag).toBe(selectedTag);
     });
   });
 });
