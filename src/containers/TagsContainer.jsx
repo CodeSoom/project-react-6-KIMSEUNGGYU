@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 
 import {
   loadTags,
+  setSelectedTag,
 } from '../modules/slice';
 
 import TagItem from '../components/TagItem';
@@ -19,6 +20,10 @@ export default function TagsContainer() {
 
   const { tags } = useSelector((state) => state);
 
+  const handleClickSelectTag = (tagName) => {
+    dispatch(setSelectedTag(tagName));
+  };
+
   if (!tags.length) {
     return <p>등록된 태그가 없어요</p>;
   }
@@ -29,6 +34,7 @@ export default function TagsContainer() {
         <TagItem
           key={id}
           name={name}
+          onClick={handleClickSelectTag}
         />
       ))}
     </TagList>
