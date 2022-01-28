@@ -1,8 +1,3 @@
-// TODO
-// 1. load 되면 tags 정보를 요청한다 (api 요청)
-// 2. 성공적으로 요청이 되면, tags 정보를 전역으로 저장한다.
-//
-
 import { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,27 +6,7 @@ import {
   loadTags,
 } from '../modules/slice';
 
-function Tags() {
-  return (
-    <ul>
-      <li>
-        <button type="button">
-          태그1
-        </button>
-      </li>
-      <li>
-        <button type="button">
-          태그2
-        </button>
-      </li>
-      <li>
-        <button type="button">
-          태그3
-        </button>
-      </li>
-    </ul>
-  );
-}
+import TagItem from '../components/TagItem';
 
 export default function TagsContainer() {
   const dispatch = useDispatch();
@@ -49,11 +24,10 @@ export default function TagsContainer() {
   return (
     <ul>
       {tags.map(({ id, name }) => (
-        <li key={id}>
-          <button type="button">
-            {name}
-          </button>
-        </li>
+        <TagItem
+          key={id}
+          name={name}
+        />
       ))}
     </ul>
   );
