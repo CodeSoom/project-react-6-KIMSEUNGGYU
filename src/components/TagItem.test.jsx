@@ -7,5 +7,5 @@ test('TagItem', () => {
 
   const { container } = render(<TagItem name={tagName} />);
 
-  expect(container).toHaveTextContent(tagName);
+  expect(container).toHaveTextContent(`#${tagName}`);
 });

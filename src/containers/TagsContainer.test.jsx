@@ -70,7 +70,7 @@ describe('tagsContainer', () => {
       const { queryByRole } = renderTagsContainer();
 
       TAGS.forEach(({ name }) => {
-        expect(queryByRole('button', { name })).toBeInTheDocument();
+        expect(queryByRole('button', { name: `#${name}` })).toBeInTheDocument();
       });
     });
   });

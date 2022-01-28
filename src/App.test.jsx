@@ -35,7 +35,7 @@ describe('App', () => {
     const { queryByRole } = render(<App />);
 
     TAGS.forEach(({ name }) => {
-      expect(queryByRole('button', { name })).toBeInTheDocument();
+      expect(queryByRole('button', { name: `#${name}` })).toBeInTheDocument();
     });
   });
 });
