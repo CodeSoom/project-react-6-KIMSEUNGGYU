@@ -1,12 +1,15 @@
 import styled from '@emotion/styled';
 
-import Header from './components/Header';
+import TagsContainer from '@containers/TagsContainer';
+
+import Header from '@components/Header';
 
 export default function App() {
   return (
     <Container>
       <Header />
       <Divider />
+      <TagsContainer />
     </Container>
   );
 }
