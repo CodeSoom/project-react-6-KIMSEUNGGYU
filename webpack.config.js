@@ -17,6 +17,9 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, ''),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@containers': path.resolve(__dirname, 'src/containers'),
+      '@modules': path.resolve(__dirname, 'src/modules'),
+      '@libs': path.resolve(__dirname, 'src/libs'),
     },
   },
   devServer: {

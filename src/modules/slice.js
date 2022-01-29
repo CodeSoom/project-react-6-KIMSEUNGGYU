@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // api
-import { fetchTags } from '../libs/api';
+import { fetchTags } from '@libs/api';
 
 //
 const { actions, reducer } = createSlice({

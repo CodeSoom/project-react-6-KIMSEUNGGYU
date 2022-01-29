@@ -9,7 +9,7 @@ import {
 
 const mockStore = configureStore(getDefaultMiddleware());
 
-jest.mock('../libs/api');
+jest.mock('@libs/api');
 
 // thunk action test
 describe('actions', () => {

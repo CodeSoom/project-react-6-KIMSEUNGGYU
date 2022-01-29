@@ -1,9 +1,9 @@
+import TAGS from '@/fixture/tags';
+
 import reducer, {
   setTags,
   setSelectedTag,
 } from './slice';
-
-import TAGS from '../../fixture/tags';
 
 // reducer 테스트
 describe('reducer', () => {

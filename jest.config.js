@@ -15,5 +15,8 @@ module.exports = {
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/$1',
     '@components/(.*)$': '<rootDir>/src/components/$1',
+    '@containers/(.*)$': '<rootDir>/src/containers/$1',
+    '@modules/(.*)$': '<rootDir>/src/modules/$1',
+    '@libs/(.*)$': '<rootDir>/src/libs/$1',
   },
 };

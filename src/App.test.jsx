@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
+import TAGS from '@/fixture/tags';
+
 import App from './App';
 
-import TAGS from '../fixture/tags';
-
 jest.mock('react-redux');
-jest.mock('./libs/api');
+jest.mock('@libs/api');
 
 describe('App', () => {
   const dispatch = jest.fn();

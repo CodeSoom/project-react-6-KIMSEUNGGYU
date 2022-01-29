@@ -9,7 +9,7 @@ import TagItem from '@components/TagItem';
 import {
   loadTags,
   setSelectedTag,
-} from '../modules/slice';
+} from '@modules/slice';
 
 export default function TagsContainer() {
   const dispatch = useDispatch();

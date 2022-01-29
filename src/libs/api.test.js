@@ -1,8 +1,8 @@
+import TAGS from '@/fixture/tags';
+
 import {
   fetchTags,
 } from './api';
-
-import TAGS from '../../fixture/tags';
 
 describe('api', () => {
   // spy 로도? 정의 가능?

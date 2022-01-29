@@ -8,15 +8,15 @@ import { render } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 
-import TagsContainer from './TagsContainer';
-
 import {
   loadTags,
   setTags,
   setSelectedTag,
-} from '../modules/slice';
+} from '@modules/slice';
 
-import TAGS from '../../fixture/tags';
+import TAGS from '@/fixture/tags';
+
+import TagsContainer from './TagsContainer';
 
 const mockStore = configureStore(getDefaultMiddleware());
 
