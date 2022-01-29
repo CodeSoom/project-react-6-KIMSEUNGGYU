@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import TAGS from '@/fixture/tags';
 
 import {
@@ -5,10 +7,9 @@ import {
 } from './api';
 
 describe('api', () => {
-  // spy 로도? 정의 가능?
   const mockFetch = (data) => {
-    global.fetch = jest.fn().mockResolvedValue({
-      async json() { return data; },
+    axios.get = jest.fn().mockResolvedValue({
+      data,
     });
   };
 
