@@ -14,6 +14,14 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, ''),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@containers': path.resolve(__dirname, 'src/containers'),
+      '@modules': path.resolve(__dirname, 'src/modules'),
+      '@libs': path.resolve(__dirname, 'src/libs'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
   },
   devServer: {
     historyApiFallback: {
