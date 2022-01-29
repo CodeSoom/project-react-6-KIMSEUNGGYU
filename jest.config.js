@@ -12,4 +12,8 @@ module.exports = {
       statements: 100,
     },
   },
+  moduleNameMapper: {
+    '@/(.*)$': '<rootDir>/$1',
+    '@components/(.*)$': '<rootDir>/src/components/$1',
+  },
 };

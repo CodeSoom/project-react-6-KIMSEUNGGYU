@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import styled from '@emotion/styled';
 
+import TagItem from '@components/TagItem';
+
 import {
   loadTags,
   setSelectedTag,
 } from '../modules/slice';
-
-import TagItem from '../components/TagItem';
 
 export default function TagsContainer() {
   const dispatch = useDispatch();
