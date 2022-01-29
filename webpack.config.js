@@ -20,6 +20,7 @@ module.exports = {
       '@containers': path.resolve(__dirname, 'src/containers'),
       '@modules': path.resolve(__dirname, 'src/modules'),
       '@libs': path.resolve(__dirname, 'src/libs'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
   devServer: {

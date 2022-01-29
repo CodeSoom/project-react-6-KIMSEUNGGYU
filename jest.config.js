@@ -18,5 +18,6 @@ module.exports = {
     '@containers/(.*)$': '<rootDir>/src/containers/$1',
     '@modules/(.*)$': '<rootDir>/src/modules/$1',
     '@libs/(.*)$': '<rootDir>/src/libs/$1',
+    '@utils/(.*)$': '<rootDir>/src/utils/$1',
   },
 };

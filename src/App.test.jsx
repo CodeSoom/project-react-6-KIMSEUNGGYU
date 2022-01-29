@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render } from '@utils/test-utils';
 
 import TAGS from '@/fixture/tags';
 

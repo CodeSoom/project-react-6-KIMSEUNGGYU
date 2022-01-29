@@ -4,7 +4,7 @@ import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
 
-import { render } from '@testing-library/react';
+import { render } from '@utils/test-utils';
 
 import userEvent from '@testing-library/user-event';
 
