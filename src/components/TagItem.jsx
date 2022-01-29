@@ -26,7 +26,8 @@ const Item = styled.li`
     border: 1px solid #F7F7F7;
     background-color: #F7F7F7;
     border-radius: .5rem;
-    color: #1890FF;
+    color: ${(props) => props.theme.color.main};
+    /* color: ${({ theme }) => theme.color.main}; */
     font-weight: bold;
     font-size: 16px;
   }
