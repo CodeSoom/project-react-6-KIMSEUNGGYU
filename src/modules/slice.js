@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // api
-import { fetchTags } from '@libs/api';
+import {
+  fetchTags,
+  fetchPosts,
+} from '@libs/api';
 
 //
 const { actions, reducer } = createSlice({
@@ -9,6 +12,7 @@ const { actions, reducer } = createSlice({
   initialState: {
     selectedTag: '', // 초기값 null이 나을까?
     tags: [],
+    posts: [],
   },
   reducers: {
     setTags(state, { payload: tags }) {
@@ -24,6 +28,13 @@ const { actions, reducer } = createSlice({
         selectedTag: selectedTagName,
       };
     },
+
+    setPosts(state, { payload: posts }) {
+      return {
+        ...state,
+        posts,
+      };
+    },
   },
 });
 
@@ -31,6 +42,7 @@ const { actions, reducer } = createSlice({
 export const {
   setTags,
   setSelectedTag,
+  setPosts,
 } = actions;
 
 // thunk actions
@@ -39,6 +51,14 @@ export function loadTags() {
     const tags = await fetchTags();
 
     dispatch(setTags(tags));
+  };
+}
+
+export function loadPosts() {
+  return async (dispatch) => {
+    const tags = await fetchPosts();
+
+    dispatch(setPosts(tags));
   };
 }
 
