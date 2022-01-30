@@ -1,14 +1,16 @@
 import TAGS from '@/fixture/tags';
+import POSTS from '@/fixture/posts';
 
 import reducer, {
   setTags,
   setSelectedTag,
+  setPosts,
 } from './slice';
 
 // reducer 테스트
 describe('reducer', () => {
   describe('setTags', () => {
-    it('chagnes tags', () => {
+    it('changes tags', () => {
       const previousState = {
         tags: [],
       };
@@ -21,7 +23,7 @@ describe('reducer', () => {
   });
 
   describe('setSelectedTag', () => {
-    it('chagnes tags', () => {
+    it('changes tags', () => {
       const selectedTag = '#TAG1';
 
       const previousState = {
@@ -33,6 +35,16 @@ describe('reducer', () => {
       expect(state.selectedTag).toBe(selectedTag);
     });
   });
-});
 
-// actions thunk 는 actions.test.js 에서 테스트?
+  describe('setPosts', () => {
+    it('changes posts', () => {
+      const previousState = {
+        posts: [],
+      };
+
+      const state = reducer(previousState, setPosts(POSTS));
+
+      expect(state.posts).toEqual(POSTS);
+    });
+  });
+});
