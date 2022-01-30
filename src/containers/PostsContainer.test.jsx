@@ -1,16 +1,26 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-} from '@modules/slice';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
+
+import configureStore from 'redux-mock-store';
 
 import { render } from '@utils/test-utils';
 
+import {
+  loadPosts,
+  setPosts,
+} from '@modules/slice';
+
 import PostsContainer from './PostsContainer';
+
+const mockStore = configureStore(getDefaultMiddleware());
 
 jest.mock('react-redux');
 jest.mock('../libs/api');
 
 describe('tagsContainer', () => {
+  let store;
+
   const dispatch = jest.fn();
   beforeEach(() => {
     dispatch.mockClear();
@@ -27,9 +37,23 @@ describe('tagsContainer', () => {
     );
   }
 
-  it('dispatchs loadPosts', () => {
-    renderPostsContainer();
+  context('when load', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
 
-    expect(dispatch).toBeCalled();
+    it('dispatchs loadPosts', async () => {
+      renderPostsContainer();
+
+      expect(dispatch).toBeCalled();
+
+      await store.dispatch(loadPosts());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        setPosts([]),
+      ]);
+    });
   });
 });
