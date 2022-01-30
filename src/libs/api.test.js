@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 import TAGS from '@/fixture/tags';
+import POSTS from '@/fixture/posts';
 
 import {
   fetchTags,
+  fetchPosts,
 } from './api';
 
 describe('api', () => {
@@ -22,6 +24,18 @@ describe('api', () => {
       const tags = await fetchTags();
 
       expect(tags).toEqual(TAGS);
+    });
+  });
+
+  describe('fetchPosts', () => {
+    beforeEach(() => {
+      mockFetch(POSTS);
+    });
+
+    it('return posts', async () => {
+      const posts = await fetchPosts();
+
+      expect(posts).toEqual(POSTS);
     });
   });
 });
