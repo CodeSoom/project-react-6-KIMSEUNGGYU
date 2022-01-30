@@ -5,6 +5,8 @@ import configureStore from 'redux-mock-store';
 import {
   loadTags,
   setTags,
+  loadPosts,
+  setPosts,
 } from './slice';
 
 const mockStore = configureStore(getDefaultMiddleware());
@@ -26,6 +28,20 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setTags([]));
+    });
+  });
+
+  describe('loadPosts', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs setPosts', async () => {
+      await store.dispatch(loadPosts());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setPosts([]));
     });
   });
 });
