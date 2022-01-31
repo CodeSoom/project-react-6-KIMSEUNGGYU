@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import styled from '@emotion/styled';
+
 import {
   loadPosts,
 } from '@modules/slice';
@@ -22,13 +24,19 @@ export default function PostsContainer() {
   }
 
   return (
-    <ul>
+    <Posts>
       {posts.map((post) => (
         <PostItem
           key={post.id}
           post={post}
         />
       ))}
-    </ul>
+    </Posts>
   );
 }
+
+const Posts = styled.ul`
+  margin: 2rem 0;
+  border-radius: 5px;
+  padding: 1rem 0;
+`;
