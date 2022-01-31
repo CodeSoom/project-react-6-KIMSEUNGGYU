@@ -10,7 +10,7 @@ import {
 const { actions, reducer } = createSlice({
   name: 'application',
   initialState: {
-    selectedTag: '', // 초기값 null이 나을까?
+    selectedTag: '#전체보기',
     tags: [],
     posts: [],
   },

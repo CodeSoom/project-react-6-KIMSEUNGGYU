@@ -24,17 +24,15 @@ const Item = styled.li`
     border: 1px solid #F7F7F7;
     background-color: #F7F7F7;
     border-radius: .5rem;
-    color: ${(props) => props.theme.color.main};
-    font-weight: bold;
     font-size: 16px;
   }
   button:hover {
     cursor: pointer;
-    color: #40a9ff;
+    color: ${({ theme }) => theme.color.hover};
   }
   button.active {
     cursor: pointer;
-    color: #096dd9;
-    border: 1px solid #096dd9;
+    color: ${({ theme }) => theme.color.active};
+    font-weight: bold;
   }
 `;
