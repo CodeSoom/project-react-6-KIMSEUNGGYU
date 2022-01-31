@@ -2,4 +2,6 @@ export async function fetchTags() {
   return [];
 }
 
-export default {};
+export async function fetchPosts() {
+  return [];
+}

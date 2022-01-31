@@ -9,4 +9,9 @@ export async function fetchTags() {
   return response.data;
 }
 
-export default {};
+export async function fetchPosts() {
+  const url = `${BASE_URL}/posts`;
+
+  const response = await axios.get(url);
+  return response.data;
+}

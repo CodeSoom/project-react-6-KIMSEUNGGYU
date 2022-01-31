@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { render } from '@utils/test-utils';
 
 import TAGS from '@/fixture/tags';
+import POSTS from '@/fixture/posts';
 
 import App from './App';
 
@@ -19,6 +20,7 @@ describe('App', () => {
 
     useSelector.mockImplementation((selector) => selector({
       tags: TAGS,
+      posts: POSTS,
     }));
   });
 
@@ -36,6 +38,19 @@ describe('App', () => {
 
     TAGS.forEach(({ name }) => {
       expect(queryByRole('button', { name: `#${name}` })).toBeInTheDocument();
+    });
+  });
+
+  it('renders posts', () => {
+    const { container } = render(<App />);
+
+    POSTS.forEach(({
+      title, contents, tags, createdAt,
+    }) => {
+      expect(container).toHaveTextContent(title);
+      expect(container).toHaveTextContent(contents);
+      expect(container).toHaveTextContent([tags]);
+      expect(container).toHaveTextContent(createdAt);
     });
   });
 });

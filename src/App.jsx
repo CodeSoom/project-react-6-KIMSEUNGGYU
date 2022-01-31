@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import TagsContainer from '@containers/TagsContainer';
+import PostsContainer from '@containers/PostsContainer';
 
 import Header from '@components/Header';
 
@@ -10,6 +11,7 @@ export default function App() {
       <Header />
       <Divider />
       <TagsContainer />
+      <PostsContainer />
     </Container>
   );
 }
@@ -21,7 +23,7 @@ const Container = styled.div`
 `;
 
 const Divider = styled.hr`
-  width: 200%;
+  width: 100%;
   position: absolute;
   left: 0;
   color: rgba(0, 0, 0, 0.15);

@@ -5,6 +5,10 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["src/components/*"],
+      "@containers/*": ["src/containers/*"],
+      "@modules/*": ["src/modules/*"],
+      "@libs/*": ["src/libs/*"],
+      "@utils/*": ["src/utils/*"],
     }
   }
 }
