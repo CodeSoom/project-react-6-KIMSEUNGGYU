@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack build",
+    "deploy": "gh-pages -d dist",
     "test:unit": "jest",
     "test:unit:all": "jest --watchAll",
     "coverage": "npm run test:unit -- --coverage",
