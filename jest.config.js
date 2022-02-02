@@ -20,4 +20,8 @@ module.exports = {
     '@libs/(.*)$': '<rootDir>/src/libs/$1',
     '@utils/(.*)$': '<rootDir>/src/utils/$1',
   },
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+    '\\.svg$': '<rootDir>/__mocks__/svg.js',
+  },
 };

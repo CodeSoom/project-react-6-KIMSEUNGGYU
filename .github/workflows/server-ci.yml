@@ -1,0 +1,47 @@
+name: Serve CI/CD
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    defaults:
+      run:
+        working-directory: server
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - name: Docker push (CI)
+      run: |
+        docker build -t seunggyu-server .
+        docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+        docker tag seunggyu-server seunggyu/seunggyu-server:${GITHUB_SHA::7}
+        docker push seunggyu/seunggyu-server:${GITHUB_SHA::7}
+    - name: Deploy (CD)
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-52-79-226-186.ap-northeast-2.compute.amazonaws.com
+        username: ec2-user
+        key: ${{ secrets.PRIVATE_KEY }}
+        envs: GITHUB_SHA
+        script: |
+          docker pull seunggyu/seunggyu-server:${GITHUB_SHA::7}
+          docker tag seunggyu/seunggyu-server:${GITHUB_SHA::7} seunggyu-server
+          docker stop server
+          docker run -d --rm --name server -p 80:3000 seunggyu-server 
