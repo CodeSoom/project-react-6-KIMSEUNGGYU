@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 
+import LogoImage from '@/images/logo.svg';
+
 export default function Header() {
   return (
     <Wrapper>
-      <img src="/images/logo.svg" alt="logo" />
+      <img src={LogoImage} alt="logo" />
       <ul>
         <li>블로그</li>
         <li>시리즈</li>

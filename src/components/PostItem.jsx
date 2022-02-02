@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import SummaryImage from '@/images/summary.svg';
+
 export default function PostItem({ post }) {
   const {
     title, summary, contents, tags, createdAt,
@@ -14,7 +16,7 @@ export default function PostItem({ post }) {
         </div>
         {summary && (
           <img
-            src="/images/summary.svg"
+            src={SummaryImage}
             alt="summary"
           />
         )}
