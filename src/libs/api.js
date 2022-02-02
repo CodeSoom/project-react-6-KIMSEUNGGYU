@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000';
+const { REACT_APP_SERVER_URL } = process.env;
+const BASE_URL = REACT_APP_SERVER_URL;
 
 export async function fetchTags() {
   const url = `${BASE_URL}/tags`;
