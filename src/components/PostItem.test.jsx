@@ -4,36 +4,46 @@ import POST from '@/fixture/post';
 
 import PostItem from './PostItem';
 
-describe('TagItem', () => {
+describe('PostItem', () => {
   function renderTagItem() {
     return render(
       <PostItem
-        post={POST}
+        post={given.post}
       />,
     );
   }
 
-  // summary 가 있는 경우/없는 경우에 따라 UI 가 달라짐
+  it('renders post', () => {
+    given('post', () => POST);
+
+    const { container } = renderTagItem();
+
+    expect(container).toHaveTextContent(POST.title);
+    expect(container).toHaveTextContent(POST.createdAt);
+    expect(container).toHaveTextContent(POST.contents);
+    expect(container).toHaveTextContent(POST.tags);
+  });
+
   context('with summary of post', () => {
-    it('renders Post', () => {
+    given('post', () => POST);
+
+    it('renders summary image', () => {
       const { container } = renderTagItem();
 
-      expect(container).toHaveTextContent(POST.title);
-      expect(container).toHaveTextContent(POST.createdAt);
       expect(container.innerHTML).toContain('<img src=');
-      expect(container).toHaveTextContent(POST.contents);
-      expect(container).toHaveTextContent(POST.tags);
     });
   });
 
   context('without summary of post', () => {
-    it('renders Post', () => {
+    given('post', () => ({
+      ...POST,
+      summary: null,
+    }));
+
+    it('don\'t do render summary of post', () => {
       const { container } = renderTagItem();
 
-      expect(container).toHaveTextContent(POST.title);
-      expect(container).toHaveTextContent(POST.createdAt);
-      expect(container).toHaveTextContent(POST.contents);
-      expect(container).toHaveTextContent(POST.tags);
+      expect(container.innerHTML).not.toContain('<img src=');
     });
   });
 });
