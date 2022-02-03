@@ -30,6 +30,7 @@ describe('PostsContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       posts: given.posts,
+      selectedTag: given.selectedTag,
     }));
   });
 
@@ -41,6 +42,7 @@ describe('PostsContainer', () => {
 
   context('when load', () => {
     given('posts', () => POSTS);
+    given('selectedTag', () => '#전체보기');
 
     beforeEach(() => {
       store = mockStore({});
@@ -61,8 +63,10 @@ describe('PostsContainer', () => {
     });
   });
 
+  // 1. 컨테스트에서 posts 데이터가 있는 경우와 없는 경우
   context('with posts', () => {
     given('posts', () => POSTS);
+    given('selectedTag', () => '#전체보기');
 
     it('renders posts', () => {
       const { container } = renderPostsContainer();
@@ -72,7 +76,7 @@ describe('PostsContainer', () => {
       }) => {
         expect(container).toHaveTextContent(title);
         expect(container).toHaveTextContent(contents);
-        expect(container).toHaveTextContent([tags]);
+        expect(container).toHaveTextContent([...tags]);
         expect(container).toHaveTextContent(createdAt);
       });
     });
@@ -85,6 +89,46 @@ describe('PostsContainer', () => {
       const { container } = renderPostsContainer();
 
       expect(container).toHaveTextContent('등록된 post 가 존재하지 않습니다');
+    });
+  });
+
+  // 2. 컨테스트 posts 데이터가 있고 selectedTag가 전체인것과 다른 값인 경우
+  // 이 경우 위 with posts 겹침..
+  context('when does not select tag', () => {
+    given('posts', () => POSTS);
+    given('selectedTag', () => '#전체보기');
+
+    it('renders posts', () => {
+      const { container } = renderPostsContainer();
+
+      POSTS.forEach(({
+        title, contents, tags, createdAt,
+      }) => {
+        expect(container).toHaveTextContent(title);
+        expect(container).toHaveTextContent(contents);
+        expect(container).toHaveTextContent([...tags]);
+        expect(container).toHaveTextContent(createdAt);
+      });
+    });
+  });
+
+  context('when select another tag ', () => {
+    given('posts', () => POSTS);
+    given('selectedTag', () => '#자료구조');
+
+    it('renders posts', () => {
+      const { container } = renderPostsContainer();
+
+      POSTS //
+        .filter((post) => post.tags.includes('자료구조'))
+        .forEach(({
+          title, contents, tags, createdAt,
+        }) => {
+          expect(container).toHaveTextContent(title);
+          expect(container).toHaveTextContent(contents);
+          expect(container).toHaveTextContent([...tags]);
+          expect(container).toHaveTextContent(createdAt);
+        });
     });
   });
 });

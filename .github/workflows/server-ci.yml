@@ -1,14 +1,16 @@
 name: Serve CI/CD
 
 on:
-  push:
-    branches: [ develop ]
+  # push:
+  #   branches: [ develop ]
   pull_request:
+    types: [ closed ]
     branches: [ develop ]
 
 jobs:
   build:
-
+    # merge 일 때만 서버를 업데이트 하고 싶음. 
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
 
     strategy:

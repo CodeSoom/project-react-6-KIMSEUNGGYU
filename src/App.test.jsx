@@ -21,6 +21,7 @@ describe('App', () => {
     useSelector.mockImplementation((selector) => selector({
       tags: TAGS,
       posts: POSTS,
+      selectedTag: '#전체보기',
     }));
   });
 
