@@ -17,7 +17,15 @@ export default function PostsContainer() {
     dispatch(loadPosts());
   }, []);
 
-  const { posts } = useSelector((state) => state);
+  const { posts, selectedTag } = useSelector((state) => state);
+
+  const getSelectedPosts = (post) => {
+    if (selectedTag === '#전체보기') {
+      return post;
+    }
+
+    return post.tags.includes(selectedTag.replace('#', ''));
+  };
 
   if (!posts.length) {
     return <p>등록된 post 가 존재하지 않습니다</p>;
@@ -25,12 +33,14 @@ export default function PostsContainer() {
 
   return (
     <Posts>
-      {posts.map((post) => (
-        <PostItem
-          key={post.id}
-          post={post}
-        />
-      ))}
+      {posts
+        .filter(getSelectedPosts)
+        .map((post) => (
+          <PostItem
+            key={post.id}
+            post={post}
+          />
+        ))}
     </Posts>
   );
 }

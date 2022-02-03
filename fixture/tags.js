@@ -1,7 +1,7 @@
 const tags = [
-  { id: 1, name: '태그1' },
-  { id: 2, name: '태그2' },
-  { id: 3, name: '태그3' },
+  { id: 1, name: '전체보기' },
+  { id: 2, name: '자료구조' },
+  { id: 3, name: 'git' },
 ];
 
 export default tags;
