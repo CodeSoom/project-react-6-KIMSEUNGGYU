@@ -10,6 +10,8 @@ import {
 
 import PostItem from '@components/PostItem';
 
+const DEFAULT_SELECTED_TAG = '#전체보기';
+
 export default function PostsContainer() {
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ export default function PostsContainer() {
   const { posts, selectedTag } = useSelector((state) => state);
 
   const getSelectedPosts = (post) => {
-    if (selectedTag === '#전체보기') {
+    if (selectedTag === DEFAULT_SELECTED_TAG) {
       return post;
     }
 
