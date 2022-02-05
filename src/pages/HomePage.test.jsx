@@ -5,7 +5,7 @@ import { render } from '@utils/test-utils';
 import TAGS from '@/fixture/tags';
 import POSTS from '@/fixture/posts';
 
-import HomePage from './HomPage';
+import HomePage from './HomePage';
 
 jest.mock('react-redux');
 jest.mock('@libs/api');
