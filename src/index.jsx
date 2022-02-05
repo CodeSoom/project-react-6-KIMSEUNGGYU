@@ -14,10 +14,12 @@ import theme from './theme';
 
 import global from './styles/global';
 
+console.log('process.env.PUBLIC_URL', process.env.PUBLIC_URL);
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Global styles={global} />
         <App />
       </BrowserRouter>

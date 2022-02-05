@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "env-cmd -f .env.development webpack serve",
-    "build": "webpack build",
+    "build": "webpack build && cp dist/index.html dist/404.html",
     "deploy": "gh-pages -d dist",
     "test:unit": "jest",
     "test:watch": "jest --watchAll",
