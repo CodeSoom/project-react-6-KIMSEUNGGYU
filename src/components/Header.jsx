@@ -1,14 +1,26 @@
 import styled from '@emotion/styled';
 
+import { Link } from 'react-router-dom';
+
 import LogoImage from '@/images/logo.svg';
 
 export default function Header() {
   return (
     <Wrapper>
-      <img src={LogoImage} alt="logo" />
+      <Link to="/">
+        <img src={LogoImage} alt="logo" />
+      </Link>
       <ul>
-        <li>블로그</li>
-        <li>시리즈</li>
+        <li>
+          <Link to="/">
+            블로그
+          </Link>
+        </li>
+        <li>
+          <Link to="/series">
+            시리즈
+          </Link>
+        </li>
         <li>로그인</li>
       </ul>
     </Wrapper>
