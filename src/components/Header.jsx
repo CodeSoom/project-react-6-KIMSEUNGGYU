@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import LogoImage from '@/images/logo.svg';
 
@@ -10,19 +10,21 @@ export default function Header() {
       <Link to="/">
         <img src={LogoImage} alt="logo" />
       </Link>
-      <ul>
+      <nav>
         <li>
-          <Link to="/">
+          <StyledNavLink to="/">
             블로그
-          </Link>
+          </StyledNavLink>
         </li>
         <li>
-          <Link to="/series">
+          <StyledNavLink to="/series">
             시리즈
-          </Link>
+          </StyledNavLink>
         </li>
-        <li>로그인</li>
-      </ul>
+        <li>
+          로그인
+        </li>
+      </nav>
     </Wrapper>
   );
 }
@@ -37,12 +39,24 @@ const Wrapper = styled.header`
     cursor: pointer;
   }
 
-  ul {
+  nav {
     display: flex;
   }
+
   li {
     list-style: none;
     margin-left: 1rem;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.hover};
+  }
+  &.active {
+    color: ${({ theme }) => theme.color.active};
   }
 `;

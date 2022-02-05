@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
+import { render } from '@utils/test-utils';
 
 import Header from './Header';
 
