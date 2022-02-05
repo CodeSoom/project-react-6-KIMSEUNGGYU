@@ -1,17 +1,21 @@
 import styled from '@emotion/styled';
 
-import TagsContainer from '@containers/TagsContainer';
-import PostsContainer from '@containers/PostsContainer';
+import { Routes, Route } from 'react-router-dom';
 
 import Header from '@components/Header';
+
+import HomePage from '@pages/HomPage';
+import NotFoundPage from '@pages/NotFoundPage';
 
 export default function App() {
   return (
     <Container>
       <Header />
       <Divider />
-      <TagsContainer />
-      <PostsContainer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </Container>
   );
 }
