@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchTags,
   fetchPosts,
+  fetchSeries,
 } from '@libs/api';
 
 //
@@ -13,6 +14,7 @@ const { actions, reducer } = createSlice({
     selectedTag: '#전체보기',
     tags: [],
     posts: [],
+    series: [],
   },
   reducers: {
     setTags(state, { payload: tags }) {
@@ -35,6 +37,13 @@ const { actions, reducer } = createSlice({
         posts,
       };
     },
+
+    setSeries(state, { payload: series }) {
+      return {
+        ...state,
+        series,
+      };
+    },
   },
 });
 
@@ -43,6 +52,7 @@ export const {
   setTags,
   setSelectedTag,
   setPosts,
+  setSeries,
 } = actions;
 
 // thunk actions
@@ -56,9 +66,17 @@ export function loadTags() {
 
 export function loadPosts() {
   return async (dispatch) => {
-    const tags = await fetchPosts();
+    const posts = await fetchPosts();
 
-    dispatch(setPosts(tags));
+    dispatch(setPosts(posts));
+  };
+}
+
+export function loadSeries() {
+  return async (dispatch) => {
+    const series = await fetchSeries();
+
+    dispatch(setSeries(series));
   };
 }
 

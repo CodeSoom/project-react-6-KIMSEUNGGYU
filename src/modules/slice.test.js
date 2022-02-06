@@ -1,10 +1,12 @@
 import TAGS from '@/fixture/tags';
 import POSTS from '@/fixture/posts';
+import SERIES from '@/fixture/series';
 
 import reducer, {
   setTags,
   setSelectedTag,
   setPosts,
+  setSeries,
 } from './slice';
 
 // reducer 테스트
@@ -23,7 +25,7 @@ describe('reducer', () => {
   });
 
   describe('setSelectedTag', () => {
-    it('changes tags', () => {
+    it('changes selectedTag', () => {
       const selectedTag = '#TAG1';
 
       const previousState = {
@@ -45,6 +47,18 @@ describe('reducer', () => {
       const state = reducer(previousState, setPosts(POSTS));
 
       expect(state.posts).toEqual(POSTS);
+    });
+  });
+
+  describe('setSeries', () => {
+    it('changes series', () => {
+      const previousState = {
+        series: [],
+      };
+
+      const state = reducer(previousState, setSeries(SERIES));
+
+      expect(state.series).toEqual(SERIES);
     });
   });
 });

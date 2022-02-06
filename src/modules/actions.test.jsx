@@ -7,6 +7,8 @@ import {
   setTags,
   loadPosts,
   setPosts,
+  loadSeries,
+  setSeries,
 } from './slice';
 
 const mockStore = configureStore(getDefaultMiddleware());
@@ -42,6 +44,20 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setPosts([]));
+    });
+  });
+
+  describe('loadSeries', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs setSeries', async () => {
+      await store.dispatch(loadSeries());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setSeries([]));
     });
   });
 });
