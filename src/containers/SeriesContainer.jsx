@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 
+import styled from '@emotion/styled';
+
 import Series from '@components/Series';
 
 export default function SeriesContainer() {
@@ -12,13 +14,23 @@ export default function SeriesContainer() {
   }
 
   return (
-    <ul>
+    <Wrapper>
       {series
         .map((item) => (
-          <li key={item.id}>
-            <Series series={item} />
-          </li>
+          <Series
+            key={item.id}
+            series={item}
+          />
         ))}
-    </ul>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.ul({
+  marginTop: '2rem',
+  width: '100%',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  padding: '1rem',
+});
