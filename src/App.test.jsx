@@ -6,6 +6,7 @@ import { render } from '@utils/test-utils';
 
 import TAGS from '@/fixture/tags';
 import POSTS from '@/fixture/posts';
+import SERIES from '@/fixture/series';
 
 import App from './App';
 
@@ -23,6 +24,7 @@ describe('App', () => {
     useSelector.mockImplementation((selector) => selector({
       tags: TAGS,
       posts: POSTS,
+      series: SERIES,
       selectedTag: '#전체보기',
     }));
   });
@@ -61,6 +63,21 @@ describe('App', () => {
         expect(container).toHaveTextContent(contents);
         expect(container).toHaveTextContent([tags]);
         expect(container).toHaveTextContent(createdAt);
+      });
+    });
+  });
+
+  context('with path /series', () => {
+    given('path', () => '/series');
+
+    it('renders the series page', () => {
+      const { container } = renderApp();
+
+      SERIES.forEach(({
+        title, subTitle,
+      }) => {
+        expect(container).toHaveTextContent(title);
+        expect(container).toHaveTextContent(subTitle);
       });
     });
   });
