@@ -6,6 +6,7 @@ import Header from '@components/Header';
 
 import HomePage from '@pages/HomePage';
 import NotFoundPage from '@pages/NotFoundPage';
+import SeriesPage from '@pages/SeriesPage';
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
       <Divider />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/series" element={<div>developing...</div>} />
+        <Route path="/series" element={<SeriesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Container>

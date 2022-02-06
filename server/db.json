@@ -63,5 +63,85 @@
             "createdAt": "2021.07.07",
             "updateddAt": "2021.07.07"
         }
+    ],
+    "series": [
+        {
+            "id": 1,
+            "title": "코드숨",
+            "subTitle": "코드숨 리액트 6기",
+            "items": [
+                {
+                    "id": 11,
+                    "title": "코드숨 1주차 회고",
+                    "summary": "",
+                    "contents": "코드숨 1주차 회고 글",
+                    "tags": ["코드숨"],
+                    "createdAt": "2022.01.01",
+                    "updateddAt": "2022.01.01"
+                },
+                {
+                    "id": 12,
+                    "title": "코드숨 2주차 회고",
+                    "summary": "",
+                    "contents": "코드숨 2주차 회고 글",
+                    "tags": ["코드숨"],
+                    "createdAt": "2022.01.01",
+                    "updateddAt": "2022.01.01"
+                },
+                {
+                    "id": 13,
+                    "title": "코드숨 3주차 회고",
+                    "summary": "",
+                    "contents": "코드숨 1주차 회고 글",
+                    "tags": ["코드숨"],
+                    "createdAt": "2022.01.01",
+                    "updateddAt": "2022.01.01"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "FE 면접",
+            "subTitle": "FE 면접 준비 및 FE 개발자 필수 역량 향상",
+            "items": [
+                {
+                    "id": 21,
+                    "title": "브라우저 렌더링 원리",
+                    "summary": "",
+                    "contents": "브라우저 렌더링 원리",
+                    "tags": [],
+                    "createdAt": "2022.02.02",
+                    "updateddAt": "2022.02.03"
+                },
+                {
+                    "id": 22,
+                    "title": "이벤트 루프란?",
+                    "summary": "",
+                    "contents": "이벤트 루프 글",
+                    "tags": [],
+                    "createdAt": "2022.02.02",
+                    "updateddAt": "2022.02.02"
+                },
+                {
+                    "id": 23,
+                    "title": "CSR 과 SSR 차이",
+                    "summary": "",
+                    "contents": "CSR 과 SSR 차이 글",
+                    "tags": [],
+                    "createdAt": "2022.01.01",
+                    "updateddAt": "2022.01.01"
+                },
+                {
+                    "id": 24,
+                    "title": "호이스팅이란?",
+                    "summary": "",
+                    "contents": "호이스팅 설명 글",
+                    "tags": [],
+                    "createdAt": "2022.04.01",
+                    "updateddAt": "2022.04.01"
+                }
+            ]
+        }
     ]
 }
+

@@ -4,6 +4,9 @@ const theme = {
     hover: '#40a9ff',
     active: '#096dd9',
     mainSVG: 'invert(44%) sepia(40%) saturate(3356%) hue-rotate(191deg) brightness(100%) contrast(102%)',
+
+    seriesBoxColor: '#E9ECEF',
+
     title: 'rgba(0, 0, 0, .85)',
     primaryText: 'rgba(0, 0, 0, .65)',
     secondaryText: 'rgba(0, 0, 0, .45)',

@@ -16,3 +16,10 @@ export async function fetchPosts() {
   const response = await axios.get(url);
   return response.data;
 }
+
+export async function fetchSeries() {
+  const url = `${BASE_URL}/series`;
+
+  const response = await axios.get(url);
+  return response.data;
+}

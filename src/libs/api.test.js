@@ -2,10 +2,12 @@ import axios from 'axios';
 
 import TAGS from '@/fixture/tags';
 import POSTS from '@/fixture/posts';
+import SERIES from '@/fixture/series';
 
 import {
   fetchTags,
   fetchPosts,
+  fetchSeries,
 } from './api';
 
 describe('api', () => {
@@ -36,6 +38,18 @@ describe('api', () => {
       const posts = await fetchPosts();
 
       expect(posts).toEqual(POSTS);
+    });
+  });
+
+  describe('fetchSeries', () => {
+    beforeEach(() => {
+      mockFetch(SERIES);
+    });
+
+    it('return posts', async () => {
+      const series = await fetchSeries();
+
+      expect(series).toEqual(SERIES);
     });
   });
 });
