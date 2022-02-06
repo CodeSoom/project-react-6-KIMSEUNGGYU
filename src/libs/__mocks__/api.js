@@ -5,3 +5,7 @@ export async function fetchTags() {
 export async function fetchPosts() {
   return [];
 }
+
+export async function fetchSeries() {
+  return [];
+}
