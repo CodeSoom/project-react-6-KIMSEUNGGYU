@@ -26,7 +26,7 @@ export default function SeriesContainer() {
   );
 }
 
-const Wrapper = styled.ul({
+const Wrapper = styled.div({
   marginTop: '2rem',
   width: '100%',
   display: 'flex',
