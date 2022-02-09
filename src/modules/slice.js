@@ -15,6 +15,7 @@ const { actions, reducer } = createSlice({
     tags: [],
     posts: [],
     series: [],
+    post: null,
   },
   reducers: {
     setTags(state, { payload: tags }) {
@@ -44,6 +45,13 @@ const { actions, reducer } = createSlice({
         series,
       };
     },
+
+    setPost(state, { payload: post }) {
+      return {
+        ...state,
+        post,
+      };
+    },
   },
 });
 
@@ -53,6 +61,7 @@ export const {
   setSelectedTag,
   setPosts,
   setSeries,
+  setPost,
 } = actions;
 
 // thunk actions
