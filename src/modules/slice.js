@@ -5,6 +5,7 @@ import {
   fetchTags,
   fetchPosts,
   fetchSeries,
+  fetchPost,
 } from '@libs/api';
 
 //
@@ -86,6 +87,14 @@ export function loadSeries() {
     const series = await fetchSeries();
 
     dispatch(setSeries(series));
+  };
+}
+
+export function loadPost(postId) {
+  return async (dispatch) => {
+    const post = await fetchPost(postId);
+
+    dispatch(setPost(post));
   };
 }
 

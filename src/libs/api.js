@@ -23,3 +23,10 @@ export async function fetchSeries() {
   const response = await axios.get(url);
   return response.data;
 }
+
+export async function fetchPost(postId) {
+  const url = `${BASE_URL}/posts/${postId}`;
+
+  const response = await axios.get(url);
+  return response.data;
+}

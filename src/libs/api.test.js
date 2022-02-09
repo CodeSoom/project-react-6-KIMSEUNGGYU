@@ -1,13 +1,15 @@
 import axios from 'axios';
 
 import TAGS from '@/fixture/tags';
-import POSTS from '@/fixture/posts';
 import SERIES from '@/fixture/series';
+import POSTS from '@/fixture/posts';
+import POST from '@/fixture/post';
 
 import {
   fetchTags,
   fetchPosts,
   fetchSeries,
+  fetchPost,
 } from './api';
 
 describe('api', () => {
@@ -50,6 +52,20 @@ describe('api', () => {
       const series = await fetchSeries();
 
       expect(series).toEqual(SERIES);
+    });
+  });
+
+  describe('fetchPost', () => {
+    beforeEach(() => {
+      mockFetch(POST);
+    });
+
+    it('return posts', async () => {
+      const postId = 1;
+
+      const post = await fetchPost(postId);
+
+      expect(post).toEqual(POST);
     });
   });
 });
