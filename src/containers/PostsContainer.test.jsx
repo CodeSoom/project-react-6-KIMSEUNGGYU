@@ -92,31 +92,11 @@ describe('PostsContainer', () => {
     });
   });
 
-  // 2. 컨테스트 posts 데이터가 있고 selectedTag가 전체인것과 다른 값인 경우
-  // 이 경우 위 with posts 겹침..
-  context('when does not select tag', () => {
-    given('posts', () => POSTS);
-    given('selectedTag', () => '#전체보기');
-
-    it('renders posts', () => {
-      const { container } = renderPostsContainer();
-
-      POSTS.forEach(({
-        title, contents, tags, createdAt,
-      }) => {
-        expect(container).toHaveTextContent(title);
-        expect(container).toHaveTextContent(contents);
-        expect(container).toHaveTextContent([...tags]);
-        expect(container).toHaveTextContent(createdAt);
-      });
-    });
-  });
-
-  context('when select another tag ', () => {
+  context('when select tag', () => {
     given('posts', () => POSTS);
     given('selectedTag', () => '#자료구조');
 
-    it('renders posts', () => {
+    it('renders posts related to tag', () => {
       const { container } = renderPostsContainer();
 
       POSTS //

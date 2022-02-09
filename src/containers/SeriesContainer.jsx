@@ -1,10 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loadSeries } from '@modules/slice';
 
 import styled from '@emotion/styled';
 
 import Series from '@components/Series';
 
 export default function SeriesContainer() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadSeries());
+  }, []);
+
   const { series } = useSelector((state) => state);
 
   if (!series.length) {
