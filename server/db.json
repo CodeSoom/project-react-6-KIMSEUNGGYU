@@ -1,5 +1,5 @@
 {
-    "tags": [
+    "tags": [       
         {
             "id": 1,
             "name": "전체보기"
@@ -15,17 +15,48 @@
         {
             "id": 4,
             "name": "git"
+        },
+        {
+            "id": 5,
+            "name": "개발환경"
         }
     ],
     "posts": [
         {
-            "id": 1,
-            "title": "자료구조 - 스택",
-            "summary": "자료구조 스택 요약 글",
-            "contents": "자료구조 스택 블로그 글",
-            "tags": ["자료구조"],
-            "createdAt": "2021.04.07",
-            "updateddAt": "2021.04.07"
+            "id": 6,
+            "title": "바벨에 대하여 알아보자!",
+            "summary": "바벨 동작 과정, 플러그인, 프리셋 및 폴리피 에 대하여",
+            "contents": "## 알게될 내용\n\n- **바벨에** 대하여 알 수 있다.\n- **바벨의 동작 과정**을 알 수 있다.\n- **바벨의 플러그인**에 대해 알 수 있다.\n- **바벨의 프리셋**에 대해 알 수 있다.\n- **폴리필**에 대하여 알 수 있다.\n\n## 개요\n\n실제 개발 환경은 웹팩과 바벨을 같이 사용해서 개념들이 정확하지 않은 경우 헷갈리는 경우 있었다. 그래서 바벨에 대해 정확히 학습하고자 했고 해당 내용을 공유하고자 한다.\n\n바벨에 대하여 알기 전에 바벨을 설치하자\n\n```bash\nnpm install -D @babel/core @babel/cli\n```\n\n- **@babel/core** : 바벨 기본적인 기능\n- **@babel/cli** : 터미널 환경에서(command) 사용하기 위함\n\n## 바벨이란?\n\n### 등장 배경\n\n사람들이 하늘을 올라가기 위해 바벨 탑을 쌓고자 했는데 이 것을 본 하나님이 사람들이 사용하는 언어를 다 바꿔서 서로 소통하지 못하게하였다. 그래서 바벨 탑 쌓는 것을 실패하게 됨. \n\n이것과 유사하게 브라우저에서 사용하는 JS 언어가 조금씩 다르다. 그래서 각 브라우저에 맞게 처리해야하므로 코드가 일관적이지 못할 경우가 많다.\n\n예를 들어 Safari 브라우저에서 `Promise.prototype.finally` 메소드를 인식하지 못하고 IE 브라우저는 화살표 함수를 인식하지 못한다.\n\n이런 문제를 해결 할 수 있는 것이 바벨이다.\n\n### 바벨 너는  누구니?\n\n**바벨은 ES6+ 으로 작성된 코드를** 모든 브라우저에서 일관되게 동작하도록 **코드 변환(트랜스파일링) 작업을통해 호환성을 지켜줌.**\n\n**즉, ES6+(이상) 의 코드를 ES5-(이하) 코드로 변환작업을 해서 모든 브라우저에서 동작하도록 코드 변환 작업을 수행함.**\n\n또한, TypeScript, JSX 등 다른 언어로 분류되는 것도 포함.\n\n### 바벨의 동작 과정\n\n- 바벨을 수행하는 과정을 빌드라고 함.\n\n동작 과정을 알아보기 전에 간단한 테스트를 해보자 (ES6 문법을 ES5 로 변환하는 작업)\n\n- `src/app.js`\n    \n    ```jsx\n    // src/app.js:\n    const alert = msg => window.alert(msg)\n    ```\n    \n    ```bash\n    npx babel app.js\n    # const alert = msg => window.alert(msg);\n    ```\n    \n\n수행을 시켰는데 기존 코드와 달라지지 않았다. \n\n바벨은 총 3 단계로 빌드를 수행한다.\n\n1. **파싱 (Parsing)**\n    \n    코드를 읽고 추상 구문 트리(AST) 로 변환하는 단계\n    \n    파싱 단계에서는 const 토큰, alert 토큰, = 토큰 등으로 하나 토큰으로 분해하는 과정\n    \n2. **변환 (Transforming)**\n    \n    추상 구문 트리를 변경 (실제 코드 변경 단계)\n    \n    ES6 로 되어 있는 코드를 ES5 로 변환?\n    \n3. **출력 (Printing)**\n    \n    변경된 결과물 출력\n    \n\n위 예에서 코드가 변경되지 않았는데 이로 인해서 파싱을 했지만, 변환하지 않음을 확인할 수 있다.\n\n그렇다면 어떻게 변화할 수 있을까? **바벨의 플러그인을 이용하여 변환 단계를 진행할 수 있다.**\n\n## 플러그인\n\n바벨은 플러그인을 통해 변환 작업을 수행한다.\n\n### 커스텀 플러그인을 구현해 보면서 자세히 알아보자!\n\n- [블로그 참고](https://jeonghwan-kim.github.io/series/2019/12/22/frontend-dev-env-babel.html#31-%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8)\n\n```jsx\n// myplugin.js:\nmodule.exports = function myplugin() {\n  return {\n    visitor: {\n      Identifier(path) {\n        const name = path.node.name // path.node.name 은 파싱된 결과물에 접근 가능 (토큰 값)\n\n        // 바벨이 만든 AST 노드를 출력한다\n        console.log(\"Identifier() name:\", name)\n\n        // 변환작업: 코드 문자열을 역순으로 변환한다\n        path.node.name = name.split(\"\").reverse().join(\"\")\n      },\n    },\n  }\n}\n```\n\n바벨을 수행하면 \n\n```jsx\nnpx babel app.js --plugins ./myplugin.js\n```\n\n- `--plugins` 옵션을 통해 플러그인을 추가해 바벨을 실행시킬 수 있다.\n\n```bash\nnpx babel ./babel-app.js --plugins ./babel/my-babel-plugin.js\n\n# Identifier() name: alert\n# Identifier() name: msg\n# Identifier() name: window\n# Identifier() name: alert\n# Identifier() name: msg\n\n# const trela = gsm => wodniw.trela(gsm);\n```\n\n- 변환 작업을 통해 `path.node.name` 값이 역순으로 출력된 것을 확인할 수 있다.\n\n이렇게 플러그인을 통해 바벨 작업시 변환 작업을 수행할 수 있다.\n\n추가적으로 `const` 키워드를 `var` 키워드로 변환하고 싶다면 아래와 같이 작성할 수 있다.\n\n```jsx\n// myplugin.js:\nmodule.exports = function myplugin() {\n  return {\n    visitor: {\n      // https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-block-scoping/src/index.js#L26\n      VariableDeclaration(path) {\n        console.log(\"VariableDeclaration() kind:\", path.node.kind) // const\n\n        if (path.node.kind === \"const\") {\n          path.node.kind = \"var\"\n        }\n      },\n    },\n  }\n}\n```\n\n### 플러그인을 사용해 바벨 작업하기\n\n위에서 커스텀 플러그인을 작성하고 수행하면서 바벨의 동작 과정을 알아보았다. \n\n바벨에서 제공하는 플러그인을 통해 기존 코드를 변환 작업을 수행하자.\n\n사용하는 바벨은 아래와 같다.\n\n- `@babel/plugin-transform-block-scoping`\n    \n    [block-scoping](https://babeljs.io/docs/en/babel-plugin-transform-block-scoping) 플러그인으로 const, let 와 같은 블록 스코핑을 따르는 예약어를 var 로 변환한다.\n    \n- `@babel/plugin-transform-arrow-functions`\n    \n    [arrow-functions](https://babeljs.io/docs/en/babel-plugin-transform-arrow-functions) 플러그인을 이용해서 화살표 함수를 일반 함수로 변경할 수 있다.\n    \n- `@babel/plugin-transform-strict-mode`\n    \n    [strict-mode](https://babeljs.io/docs/en/babel-plugin-transform-strict-mode) 플러그인은 `use strict` 구문을 추가한다.\n    \n\n**설치 및 수행**\n\n```bash\nnpm install -D @babel/plugin-transform-block-scoping \\\n  @babel/plugin-transform-arrow-functions \\\n  @babel/plugin-transform-strict-mode\n```\n\n```bash\nnpx babel ./babel-app.js \\\n  --plugins @babel/plugin-transform-block-scoping \\\n  --plugins @babel/plugin-transform-arrow-functions \\\n  --plugins @babel/plugin-transform-strict-mode\n\n# \"use strict\";\n# \n# var alert = function (msg) {\n#  return window.alert(msg);\n# };\n```\n\n- 이렇게 변환된 것을 확인할 수 있다.\n\n하지만 이렇게 스크립트로 수행할 때 `--plugins` 로 각각의 플러그인을 추가하는 것은 어려움이 존재한다. 그래서 바벨은 `babel.config.js` 파일로 바벨 설정 파일을 제공한다.\n\n**바벨 설정 파일 추가**\n\n```jsx\n// babel.config.js:\nmodule.exports = {\n  plugins: [\n    \"@babel/plugin-transform-block-scoping\",\n    \"@babel/plugin-transform-arrow-functions\",\n    \"@babel/plugin-transform-strict-mode\",\n  ],\n}\n```\n\n- 바벨은 plugins 배열을 통해 플러그인을 추가할 수 있다.\n\n```bash\nnpx babel app.js\n\n# \"use strict\";\n# \n# var alert = function (msg) {\n#   return window.alert(msg);\n# };\n```\n\n## 프리셋\n\n위 예에서 살펴 보았듯이 코드 한 줄을 변환하는데 여러 플러그인이 필요했다. 코드를 작업할 때 마다 바벨 플러그인을 추가하는 것은 어려움이 존재한다. \n\n그래서 목적에 맞게 **여러 플러그인을 세트로 모아놓은 것을 프리셋**이라 한다. \n\n### 커스텀 프리셋\n\n```jsx\n// mypreset.js\nmodule.exports = function mypreset() {\n  return {\n    plugins: [\n      \"@babel/plugin-transform-arrow-functions\",\n      \"@babel/plugin-transform-block-scoping\",\n      \"@babel/plugin-transform-strict-mode\",\n    ],\n  }\n}\n```\n\n```jsx\n// babel.config.js\nmodule.exports = {\n  presets: [\"./mypreset.js\"],\n}\n```\n\n- 바벨에서 프리셋을 사용한다면, `presets` 배열에 추가해야한다.\n\n### 프리셋 사용하기\n\n바벨은 목적에 따라 다양한 [프리셋](https://babeljs.io/docs/en/presets)을 제공한다.\n\n- **preset-env**\n    \n    ES6+ 이상을 변환할 때 사용\n    \n- **preset-react**\n    \n    리액트를 변환하기 위한 프리셋\n    \n- **preset-typescript**\n    \n    타입스크립트를 변환하기 위한 프리셋\n    \n\n### env 프리셋 사용해보기!!\n\n**설치 및 사용하기**\n\n```bash\nnpm install -D @babel/preset-env\n```\n\n```jsx\n// babel.config.js:\nmodule.exports = {\n  presets: [\"@babel/preset-env\"],\n}\n```\n\n```bash\nnpx babel app.js\n\n# \"use strict\";\n# \n# var alert = function alert(msg) {\n#  return window.alert(msg);\n# };\n```\n\n이렇게 프리셋을 통해 간단하게 바벨을 사용할 수 있다.\n\n**타겟 브라우저**\n\nenv 프리셋은 타겟 브라우저를 설정해 변환시키고자 하는 브라우저에 맞게 최적의 코드로 변환한다.\n\n예를 들어 최신 버전인 Chrome 97 은 const, 화살표 함수 모두 지원하기 때문에 변환 작업이 필요하지 않다. 하지만, IE 11 과 같이 const, 화살표 함수를 지원하지 않은 경우 변환 작업이 필요하다. \n\n```jsx\n// babel.config.js\nmodule.exports = {\n  presets: [\n    [\n      \"@babel/preset-env\",\n      {\n        targets: {\n          // chrome: \"79\",\n          ie: \"11\", // ie 11까지 지원하는 코드를 만든다\n        },\n      },\n    ],\n  ],\n}\n```\n\n```bash\nnpx babel app.js\n\n# \"use strict\";\n# \n# var alert = function alert(msg) {\n#   return window.alert(msg);\n# };\n```\n\n이렇게 타겟을 설정하면 바벨은 환경에 맞춰 변환 작업을 수행한다. \n\n \n\n## 폴리필\n\n이번엔 변환과 조금 다른 플리필에 대해 알아보자.\n\n폴리필을 알기 위해 기존의 코드에 ES6에서 사용하는 Promise 객체를 추가하자\n\n```jsx\n// app.js\nconst alert = (msg) => window.alert(msg);\n\nnew Promise();\n```\n\n```bash\nnpx babel app.js\n\n# \"use strict\";\n# ... (앞으로 기존의 const, arrow 함수는 생략하겠다.)\n# new Promise();\n```\n\n바벨을 수행시켰는데 Promise 가 변환되지 않은 것을 확인할  수 있다.\n\n그렇다면 왜 Promise 는 변환되지 않은걸까??\n\n왜냐하면 **바벨**은 ES6+ 작성된 코드를 ES5- 로 **변환할 수 있는 것만 빌드**한다.\n\n그래서 ES6 의 블록 스코핑은 함수 스코핑으로 화살표 함수는 일반함수로 대체할 수 있다.\n\n하지만, Promise 는 ES5- 으로 대체할 수 없다.(왜냐하면 Promise 는 ES6에 나온 개념) 그래서 ES5 버전으로 구현된 Promise 코드를 추가(폴리필) 하여 ****사용할 수 있다. (참고: [core-js promise](https://github.com/zloirock/core-js/blob/master/packages/core-js/modules/es.promise.js))\n\n따라서 **폴리필은 코드 조각**이다.\n\n### env 프리셋에서 폴리필 사용하기\n\n```jsx\n// babel.config.js:\nmodule.exports = {\n  presets: [\n    [\n      \"@babel/preset-env\",\n      {\n        useBuiltIns: \"usage\", // 폴리필 사용 방식 지정\n        corejs: {\n          // 폴리필 버전 지정\n          version: 2,\n        },\n      },\n    ],\n  ],\n}\n```\n\n- `**useBuiltIns`**\n    \n    어떤 방식으로 폴리필을 사용할지 설정하는 옵션\n    \n    default 값은 false 이고, usage, entry 로 폴리필을 사용할 수 있다.\n    \n\n```bash\nnpx babel src/app.js\n\n# \"use strict\";\n# \n# require(\"core-js/modules/es6.object.to-string.js\");\n# \n# require(\"core-js/modules/es6.promise.js\");\n# \n# ...\n# \n# new Promise();\n```\n\n여전히 new Promise 를 사용하고 있지만, 위에 require 로 promise 에서 사용할 수 있도록 core-js 패키지로부터 프라미스 모듈을 가져온 것을 확인할 수 있다. \n\n여기까지 폴리필에 대하여 알아봤다.\n\n## 웹팩과 통합\n\n실제로 바벨을 사용할 때는 웹팩과 같이 사용하는 것이 일반적이다. \n\n웹팩에서 바벨을 사용해보자 `babel-loader`\n\n**설치**\n\n```bash\nnpm install -D babel-loader\n```\n\n```jsx\n// webpack.config.js:\nmodule.exports = {\n  module: {\n    rules: [\n      {\n        test: /\\.js$/,\n        exclude: /node_modules/,\n        loader: \"babel-loader\", // 바벨 로더를 추가한다\n      },\n    ],\n  },\n}\n```\n\n`.js` 확장자로 끝나는 파일은 babel-loader가 처리하도록 했다.\n\n우리는 폴리필도 설정했기 때문에 core-js 도 설치해야한다.\n\n왜냐하면 웹팩은 바벨 로더가 만든 아래 코드를 만나면 core-js 를 찾기 때문이다.\n\n```jsx\n// require(\"core-js/modules/es6.object.to-string.js\");\n// \n// require(\"core-js/modules/es6.promise.js\");\n```\n\n**core-js 설치 및 웹팩 수행**\n\n```bash\nnpm i core-js@2\n```\n\n```bash\nnpx webpack\n```\n\n빌드된 결과를 확인하면 core-js 의 promise 가 로드될 것을 확인할  수 있다.\n\n![babel-build-result](http://res.cloudinary.com/du4w00gvm/image/upload/v1634437572/zsgvsysssvbuprhhq2cw.png)\n\n## 정리\n\n- 바벨탑이 서로의 언어가 달라져 실패했듯이, 같은 JS라도 브라우저마다 차이가 있는데 이런 차이점을 **공통된 형태로 변환해주는 것이 바벨**이라는 것을 알게되었다.\n    \n    이렇게 서로 다른 브라우저에서 사용할 수 있게 변환(트랜스컴파일링)하는 이유는 일관된 코드를 작성하기 위함이다.\n    \n- 바벨의 **빌드 과정**은 총 3가지 형태(파싱, 변환, 출력)로 동작한다.\n- 바벨은 변환 작업할 때 **플러그인**을 통해 변환 작업을 수행한다.\n- 플러그인의 세트를 **프리셋**이라 한다. (env 등)\n- **폴리필**이라는 개념도 알아봤다.\n    \n    바벨을 통해서 변환될 수 있는 작업은 변환이 되지만, ES5- 버전에 없는 개념 (Promise 등)은 변환되지 않기 때문에 폴리필이라는 코드 조각을 추가해서 변환되지 않은 코드도 사용할 수 있게 했다.\n    \n- 마지막으로 바벨을 웹팩에서 사용하는 방법을 알아봤다.\n\n웹팩과 바벨에 대하여 확실히 알 수 있는 계기가 되었으면 좋겠다.\n\n## reference\n\n- [https://jeonghwan-kim.github.io/series/2019/12/22/frontend-dev-env-babel.html](https://jeonghwan-kim.github.io/series/2019/12/22/frontend-dev-env-babel.html)",
+            "tags": ["개발환경"],
+            "createdAt": "2022.02.02",
+            "updateddAt": "2022.02.03"
+        },
+        {
+            "id": 5,
+            "title": "git 태그 알고 사용하자",
+            "summary": "tag 에 대한 간단 명령어 생성, 원격 생성 등",
+            "contents": "## git tag 알고 쓰자\ngit tag 명령어를 자주 사용해서 해당 내용을 간단하게 정리하고자 한다\n\n\n### 생성\n\n```bash\ngit tag -a v1.0.0 -m \"react todo list 기본 템플릿\"\n```\n\n- `-a` 옵션은 Annotated 태그를 나타냄\n    \n    Annotated 태그를 만든 사람, 이메일, 날짜, 메시지를 저장할 수 있음\n    \n\n### 조회\n\n```bash\ngit tag\n# v1.0.0\n```\n\n```bash\ngit show v1.0.0\n```\n\n- show 옵션은 -a 로 저장한 tag에 상세 정보를 확인할 수 있음. ?\n\n### 원격 저장소에 올리기\n\n**특정 태그**\n\n```bash\ngit push origin v1.0.0\n```\n\n**모든 태그**\n\n```bash\ngit push origin --tags\n```\n\n**삭제**\n\n```bash\ngit tag -d v1.0.0\n```\n\n**원격 저장소와 동기화?**\n\n```bash\ngit push origin :v1.0.0\n```",
+            "tags": ["git"],
+            "createdAt": "2021.07.07",
+            "updateddAt": "2021.07.07"
+        },
+        {
+            "id": 4,
+            "title": "바닐라 자바스크립트로 리액트 흉내내기 2 - 리덕스",
+            "summary": "",
+            "contents": "바닐라 자바스크립트로 리액트 흉내내기 2 블로그 글",
+            "tags": ["자바스크립트"],
+            "createdAt": "2021.07.07",
+            "updateddAt": "2021.07.07"
+        }, 
+        {
+            "id": 3,
+            "title": "바닐라 자바스크립트로 리액트 흉내내기 1 - 웹 컴포넌트",
+            "summary": "",
+            "contents": "블랙커피 LV1 스터디를 하면서(바닐라 자바스크립트로 미션을 해결하면서) 리액트 스럽게 바닐라 자바스크립트로 구현할 수 없을까? 를 고민했고 미션을 하면서 어느 정도 틀이 잡혔습니다. 이후에 황준일 개발자님의 포스트를 보고 저도 저만의 스타일로 만들고자 해당 내용을 구상했습니다. github 구조를 보시면 다양한 폴더들로 구성되어 있는데 간단하게 설명하자면",
+            "tags": ["자바스크립트"],
+            "createdAt": "2021.06.07",
+            "updateddAt": "2021.06.07"
         },
         {
             "id": 2,
@@ -37,31 +68,13 @@
             "updateddAt": "2021.05.08"
         },
         {
-            "id": 3,
-            "title": "바닐라 자바스크립트로 리액트 흉내내기 1 - 웹 컴포넌트",
-            "summary": "",
-            "contents": "블랙커피 LV1 스터디를 하면서(바닐라 자바스크립트로 미션을 해결하면서) 리액트 스럽게 바닐라 자바스크립트로 구현할 수 없을까? 를 고민했고 미션을 하면서 어느 정도 틀이 잡혔습니다. 이후에 황준일 개발자님의 포스트를 보고 저도 저만의 스타일로 만들고자 해당 내용을 구상했습니다. github 구조를 보시면 다양한 폴더들로 구성되어 있는데 간단하게 설명하자면",
-            "tags": ["자바스크립트"],
-            "createdAt": "2021.06.07",
-            "updateddAt": "2021.06.07"
-        },
-        {
-            "id": 4,
-            "title": "바닐라 자바스크립트로 리액트 흉내내기 2 - 리덕스",
-            "summary": "",
-            "contents": "바닐라 자바스크립트로 리액트 흉내내기 2 블로그 글",
-            "tags": ["자바스크립트"],
-            "createdAt": "2021.07.07",
-            "updateddAt": "2021.07.07"
-        },
-        {
-            "id": 5,
-            "title": "git 태그 알고 사용하자",
-            "summary": "tag 에 대한 간단 명령어 생성, 원격 생성 등",
-            "contents": "git tag 알고 쓰자 git tag 명령어를 자주 사용해서 해당 내용을 간단하게 정리하고자 한다 생성 git tag -a v1.0.0 -m react todo list 기본 템플릿 -a 옵션은 Annotated 태그를 나타냄 Annotated 태그를 만든 사람, 이메일, 날짜, 메시지를 저장할 수 있음",
-            "tags": ["git"],
-            "createdAt": "2021.07.07",
-            "updateddAt": "2021.07.07"
+            "id": 1,
+            "title": "자료구조 - 스택",
+            "summary": "자료구조 스택 요약 글",
+            "contents": "자료구조 스택 블로그 글",
+            "tags": ["자료구조"],
+            "createdAt": "2021.04.07",
+            "updateddAt": "2021.04.07"
         }
     ],
     "series": [

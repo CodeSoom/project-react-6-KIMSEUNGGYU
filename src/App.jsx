@@ -5,8 +5,9 @@ import { Routes, Route } from 'react-router-dom';
 import Header from '@components/Header';
 
 import HomePage from '@pages/HomePage';
-import NotFoundPage from '@pages/NotFoundPage';
 import SeriesPage from '@pages/SeriesPage';
+import PostPage from '@pages/PostPage';
+import NotFoundPage from '@pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -15,6 +16,8 @@ export default function App() {
       <Divider />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/posts" element={<HomePage />} />
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/series" element={<SeriesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
