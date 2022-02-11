@@ -9,3 +9,7 @@ export async function fetchPosts() {
 export async function fetchSeries() {
   return [];
 }
+
+export async function fetchPost() {
+  return {};
+}

@@ -11,9 +11,6 @@ const global = css`
         margin: 0;
         padding: 0;
         background: #F7F7F7;
-    }
-
-    body {
         box-sizing: border-box;
     }
 
@@ -31,6 +28,7 @@ const global = css`
         all: unset; 
     }
 
+    h1,
     h2 {
         margin: 0;
     }

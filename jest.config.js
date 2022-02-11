@@ -20,6 +20,8 @@ module.exports = {
     '@modules/(.*)$': '<rootDir>/src/modules/$1',
     '@libs/(.*)$': '<rootDir>/src/libs/$1',
     '@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '@plugins/(.*)$': '<rootDir>/src/plugins/$1',
+    '@styles/(.*)$': '<rootDir>/src/styles/$1',
   },
   transform: {
     '^.+\\.jsx?$': 'babel-jest',

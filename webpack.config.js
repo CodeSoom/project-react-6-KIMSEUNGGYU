@@ -12,6 +12,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -47,6 +48,8 @@ module.exports = {
       '@modules': path.resolve(__dirname, 'src/modules'),
       '@libs': path.resolve(__dirname, 'src/libs'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@plugins': path.resolve(__dirname, 'src/plugins'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
     },
   },
   devServer: {

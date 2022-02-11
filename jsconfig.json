@@ -10,6 +10,8 @@
       "@modules/*": ["src/modules/*"],
       "@libs/*": ["src/libs/*"],
       "@utils/*": ["src/utils/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@styles/*": ["src/styles/*"],
     }
   }
 }

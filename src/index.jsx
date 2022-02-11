@@ -8,11 +8,10 @@ import { Global, ThemeProvider } from '@emotion/react';
 
 import store from '@modules/store';
 
+import theme from '@styles/theme';
+import global from '@styles/global';
+
 import App from './App';
-
-import theme from './theme';
-
-import global from './styles/global';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
