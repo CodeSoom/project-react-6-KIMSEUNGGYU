@@ -2,7 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 
 import { render } from '@testing-library/react';
 
-import theme from '../theme';
+import theme from '@styles/theme';
 
 const AllTheProvider = ({ children }) => (
   <ThemeProvider theme={theme}>

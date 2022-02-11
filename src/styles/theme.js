@@ -7,6 +7,7 @@ const theme = {
 
     seriesBoxColor: '#E9ECEF',
 
+    // text
     title: 'rgba(0, 0, 0, .85)',
     primaryText: 'rgba(0, 0, 0, .65)',
     secondaryText: 'rgba(0, 0, 0, .45)',
@@ -14,6 +15,11 @@ const theme = {
     border: 'rgba(0, 0, 0, .15)',
     dividers: 'rgba(0, 0, 0, 0.06)',
     background: 'rgba(0, 0, 0, 0.04)',
+
+    // post contents style
+    A_LINK: 'rgba(55, 53, 47, 0.4);',
+    INLINE_CODE_BACKGROUND: 'rgb(247, 246, 243)',
+    INLINE_CODE_COLOR: 'rgb(235, 87, 87)',
   },
 };
 
