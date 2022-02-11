@@ -48,6 +48,8 @@ module.exports = {
       '@modules': path.resolve(__dirname, 'src/modules'),
       '@libs': path.resolve(__dirname, 'src/libs'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@plugins': path.resolve(__dirname, 'src/plugins'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
     },
   },
   devServer: {
