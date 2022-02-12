@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadPost,
-  setPost,
 } from '@modules/slice';
 
 import PostInfo from '@components/PostInfo';
@@ -15,8 +14,6 @@ export default function PostsContainer({ postId }) {
 
   useEffect(() => {
     dispatch(loadPost(postId));
-
-    return () => dispatch(setPost(null));
   }, []);
 
   const { post } = useSelector((state) => state);

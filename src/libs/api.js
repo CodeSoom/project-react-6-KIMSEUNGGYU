@@ -25,8 +25,8 @@ export async function fetchSeries() {
 }
 
 export async function fetchPost(postId) {
-  const url = `${BASE_URL}/posts/${postId}`;
+  const url = `${BASE_URL}/posts?id=${postId}`;
 
   const response = await axios.get(url);
-  return response.data;
+  return Array.isArray(response.data) ? response.data[0] : response.data;
 }
