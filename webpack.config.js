@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: process.env.REACT_APP_MODE === 'production' ? '' : '/',
   },
   module: {
     rules: [
