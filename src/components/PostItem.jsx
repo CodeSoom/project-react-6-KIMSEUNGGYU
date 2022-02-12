@@ -1,41 +1,45 @@
+import { Link } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 import SummaryImage from '@/images/summary.svg';
 
 export default function PostItem({ post }) {
   const {
-    title, summary, contents, tags, createdAt,
+    id, title, summary, contents, tags, createdAt,
   } = post;
 
   return (
-    <Item>
-      <div>
+    <Link to={`/posts/${id}`}>
+      <Item>
         <div>
-          <Title>{title}</Title>
-          <CreatedAt>{createdAt}</CreatedAt>
+          <div>
+            <Title>{title}</Title>
+            <CreatedAt>{createdAt}</CreatedAt>
+          </div>
+          {summary && (
+            <img
+              src={SummaryImage}
+              alt="summary"
+            />
+          )}
         </div>
-        {summary && (
-          <img
-            src={SummaryImage}
-            alt="summary"
-          />
-        )}
-      </div>
-      <Contents>
-        <span>
-          {contents}
-        </span>
-      </Contents>
-      <Tags>
-        {tags.map((tag) => (
-          <li key={`${tag}`}>
-            <p>
-              {`#${tag}`}
-            </p>
-          </li>
-        ))}
-      </Tags>
-    </Item>
+        <Contents>
+          <span>
+            {contents}
+          </span>
+        </Contents>
+        <Tags>
+          {tags.map((tag) => (
+            <li key={`${tag}`}>
+              <p>
+                {`#${tag}`}
+              </p>
+            </li>
+          ))}
+        </Tags>
+      </Item>
+    </Link>
   );
 }
 

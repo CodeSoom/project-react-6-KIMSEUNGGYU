@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { MemoryRouter } from 'react-router';
+
 import { render } from '@utils/test-utils';
 
 import TAGS from '@/fixture/tags';
@@ -25,9 +27,17 @@ describe('HomePage', () => {
     }));
   });
 
+  function renderHomePage() {
+    return render((
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    ));
+  }
+
   // render
   it('redners tags', () => {
-    const { queryByRole } = render(<HomePage />);
+    const { queryByRole } = renderHomePage();
 
     TAGS.forEach(({ name }) => {
       expect(queryByRole('button', { name: `#${name}` })).toBeInTheDocument();
@@ -35,7 +45,7 @@ describe('HomePage', () => {
   });
 
   it('renders posts', () => {
-    const { container } = render(<HomePage />);
+    const { container } = renderHomePage();
 
     POSTS.forEach(({
       title, contents, tags, createdAt,
