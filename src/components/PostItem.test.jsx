@@ -1,16 +1,20 @@
 import { render } from '@utils/test-utils';
 
+import { MemoryRouter } from 'react-router';
+
 import POST from '@/fixture/post';
 
 import PostItem from './PostItem';
 
 describe('PostItem', () => {
   function renderTagItem() {
-    return render(
-      <PostItem
-        post={given.post}
-      />,
-    );
+    return render((
+      <MemoryRouter>
+        <PostItem
+          post={given.post}
+        />
+      </MemoryRouter>
+    ));
   }
 
   it('renders post', () => {

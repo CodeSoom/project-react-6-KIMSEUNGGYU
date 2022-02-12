@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { MemoryRouter } from 'react-router';
+
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import configureStore from 'redux-mock-store';
@@ -35,9 +37,11 @@ describe('PostsContainer', () => {
   });
 
   function renderPostsContainer() {
-    return render(
-      <PostsContainer />,
-    );
+    return render((
+      <MemoryRouter>
+        <PostsContainer />
+      </MemoryRouter>
+    ));
   }
 
   context('when load', () => {
