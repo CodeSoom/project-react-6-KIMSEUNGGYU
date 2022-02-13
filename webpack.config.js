@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: process.env.REACT_APP_MODE === 'production' ? '' : '/',
+    clean: true,
   },
   module: {
     rules: [
@@ -36,6 +38,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/404.html' },
+      ],
     }),
   ],
   resolve: {
