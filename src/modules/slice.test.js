@@ -4,6 +4,7 @@ import POST from '@/fixture/post';
 import SERIES from '@/fixture/series';
 
 import reducer, {
+  setIsLogin,
   setTags,
   setSelectedTag,
   setPosts,
@@ -13,6 +14,18 @@ import reducer, {
 
 // reducer 테스트
 describe('reducer', () => {
+  describe('setTags', () => {
+    it('changes tags', () => {
+      const previousState = {
+        isLogin: false,
+      };
+
+      const state = reducer(previousState, setIsLogin(true));
+
+      expect(state.isLogin).toBe(true);
+    });
+  });
+
   describe('setTags', () => {
     it('changes tags', () => {
       const previousState = {
