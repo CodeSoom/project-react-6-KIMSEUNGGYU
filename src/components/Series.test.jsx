@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import { render } from '@utils/test-utils';
 
 import userEvent from '@testing-library/user-event';
@@ -13,9 +15,11 @@ describe('Series', () => {
 
   function renderSeries() {
     const result = render((
-      <Series
-        series={SERIES_ITEM}
-      />
+      <MemoryRouter>
+        <Series
+          series={SERIES_ITEM}
+        />
+      </MemoryRouter>
     ));
 
     return {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 import OpenIcon from '@/images/open.svg';
@@ -37,7 +39,9 @@ export default function Series({ series }) {
         <SeriesPosts>
           {items.map((item) => (
             <li key={item.title}>
-              {item.title}
+              <Link to={`/posts/${item.id}`}>
+                {item.title}
+              </Link>
             </li>
           ))}
           <ToggleIcon>
@@ -117,7 +121,7 @@ const SeriesPosts = styled.div(({ theme }) => ({
     listStyle: 'decimal',
   },
 
-  'li:hover': {
+  'li:hover, a:hover': {
     cursor: 'pointer',
     color: theme.color.hover,
   },
