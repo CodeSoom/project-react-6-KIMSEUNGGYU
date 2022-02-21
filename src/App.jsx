@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
-
 import { Routes, Route } from 'react-router-dom';
+
+import styled from '@emotion/styled';
 
 import Header from '@components/Header';
 
