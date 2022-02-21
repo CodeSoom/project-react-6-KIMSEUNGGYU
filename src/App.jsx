@@ -2,7 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import Header from '@components/Header';
+// import Header from '@components/Header';
+import HeaderContainer from '@containers/HeaderContainer';
 
 import HomePage from '@pages/HomePage';
 import SeriesPage from '@pages/SeriesPage';
@@ -12,7 +13,8 @@ import NotFoundPage from '@pages/NotFoundPage';
 export default function App() {
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
+      <HeaderContainer />
       <Divider />
       <Routes>
         <Route path="/" element={<HomePage />} />

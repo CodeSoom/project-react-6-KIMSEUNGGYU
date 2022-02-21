@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import LogoImage from '@/images/logo.svg';
 
-export default function Header() {
+export default function Header({ isLogin, onLogin, onLogout }) {
   return (
     <Wrapper>
       <Link to="/">
@@ -21,9 +21,29 @@ export default function Header() {
             시리즈
           </StyledNavLink>
         </li>
-        <li>
-          로그인
-        </li>
+        {
+          isLogin
+            ? (
+              <li>
+                <button
+                  type="button"
+                  onClick={onLogout}
+                >
+                  로그아웃
+                </button>
+              </li>
+            )
+            : (
+              <li>
+                <button
+                  type="button"
+                  onClick={onLogin}
+                >
+                  로그인
+                </button>
+              </li>
+            )
+        }
       </nav>
     </Wrapper>
   );

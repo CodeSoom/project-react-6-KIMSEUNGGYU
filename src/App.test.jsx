@@ -13,6 +13,14 @@ import App from './App';
 
 jest.mock('react-redux');
 jest.mock('@libs/api');
+window.Kakao = {
+  isInitialized: jest.fn(),
+  init: jest.fn(),
+  Auth: {
+    getAccessToken: jest.fn(),
+    login: jest.fn(),
+  },
+};
 
 describe('App', () => {
   const dispatch = jest.fn();
