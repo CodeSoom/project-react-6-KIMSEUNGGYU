@@ -12,6 +12,7 @@ import {
 const { actions, reducer } = createSlice({
   name: 'application',
   initialState: {
+    isLogin: false,
     selectedTag: '#전체보기',
     tags: [],
     posts: [],
@@ -19,6 +20,12 @@ const { actions, reducer } = createSlice({
     post: null,
   },
   reducers: {
+    setIsLogin(state, { payload: isLogin }) {
+      return {
+        ...state,
+        isLogin,
+      };
+    },
     setTags(state, { payload: tags }) {
       return {
         ...state,
@@ -63,6 +70,7 @@ export const {
   setPosts,
   setSeries,
   setPost,
+  setIsLogin,
 } = actions;
 
 // thunk actions
